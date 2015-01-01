@@ -1,0 +1,20 @@
+<table class="table table-hover table-bordered">
+  <tr>
+    <th>#</th>
+    <th>Shop</th>
+    <th>Date</th>
+    <th>Bill #</th>
+    <th>Warranty #</th>
+    <th>Customer</th>
+    <th>Dealer</th>
+  </tr>
+  <tr ng-repeat="s in purchases" ng-click="showBill(s.id)">
+    <td>{{$index + 1}}</td>
+    <td><shop-link shop="s.shop"></shop-link></td>
+    <td>{{s.date | date}}</td>
+    <td>{{s.bill_no}}</td>
+    <td>{{s.warranty_no}}</td>
+    <td>{{s.customer.name}}</td>
+    <td><shop-link shop="s.dealer"></shop-link></td>
+  </tr>
+</table>

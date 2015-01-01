@@ -1,0 +1,14 @@
+.idea
+static/bower_components/
+staticfiles
+staticfiles/
+*.pyc
+*/*.pyc
+*/*/*.pyc
+*.swp
+*/*.swp
+*.log
+*.xml
+*.iml
+*~
+

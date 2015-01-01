@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="well">
+			<form role="form" class="form" action="" method="post">
+        {% csrf_token %}
+				<div class="form-group">
+					<label>Email Address</label>
+					<input type="email" name="email" placeholder="ex. example@domain.com" class="form-control"/>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" name="password" class="form-control" placeholder="******"/>
+				</div>
+				<input type="submit" id="submit" class="btn btn-primary" value="Login"/>
+				<!--<div class="alert alert-danger" role="alert" ng-show="vm.error">{{form.error}}</div>-->
+        {% if form.custom_errors %}
+            {% for e in form.custom_errors %}
+                <div class="alert alert-danger" role="alert">{{e}}</div>
+            {% endfor %}
+        {% endif %}
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

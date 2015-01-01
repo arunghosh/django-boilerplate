@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="well">
+			<form role="form" name="form" ng-submit="vm.register(form)">
+				<div class="form-group">
+					<label>Email Address</label>
+					<input type="email" name="email" ng-model="vm.user.email" placeholder="ex. example@domain.com" class="form-control" required/>
+          <!--<div>{{}}</div>-->
+				</div>
+				<div class="form-group">
+					<label>Full Name</label>
+					<input type="text" ng-model="vm.user.name" placeholder="ex. Bob John" class="form-control" required/>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" ng-model="vm.user.password" class="form-control" placeholder="******" required/>
+				</div>
+				<input type="submit" id="submit" class="btn btn-primary" value="Register"/>
+				<div class="alert alert-danger" role="alert" ng-show="vm.error">{{vm.error}}</div>
+			</form>
+		</div>
+	</div>
+</div>
