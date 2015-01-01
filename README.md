@@ -1,5 +1,5 @@
-Boilerplate Django with authentication
-======================================
+Boilerplate for Django with Session Auth
+========================================
 
 Installation:
  * pip install -r requirements.txt
