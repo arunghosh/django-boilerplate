@@ -2,17 +2,17 @@ Boilerplate Django with authentication
 ======================================
 
 Installation:
-*pip install -r requirements.txt
-*bower install
+ * pip install -r requirements.txt
+ * bower install
 
 Server
-*Django
-*Rest Framework
+ * Django
+ * Rest Framework
 
 Client
-*Angular
-*Angular UI Router
-*Twitter Bootstrap
-*Bootstrap Material Design
-*Font Awesome
+ * Angular
+ * Angular UI Router
+ * Twitter Bootstrap
+ * Bootstrap Material Design
+ * Font Awesome
 
