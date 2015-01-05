@@ -1,0 +1,72 @@
+@import 'app';
+
+img.person{
+  height: 70px;
+  border-radius:20%;
+}
+
+body, table{
+  font-size:14px;
+}
+
+.d-ib{
+  display: inline-block;
+}
+
+.bld{
+  font-weight:bold;
+}
+.list{
+  padding: 10px 2px;
+  /*border-bottom: 1px solid #ccc;*/
+}
+
+.ta-r{
+  text-align:right;
+}
+
+.input-group-addon.search{
+  padding: 0 8px 0 0;
+  color: #888;
+} .sugg h5{
+  font-weight: normal;
+  font-size: 14px;
+}
+h4, h3{
+  margin:0;
+}
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px!important;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd!important;
+}
+
+.list-group-head{
+  color: #000;
+  font-weight:normal;
+  font-size:16px;
+}
+
+.skill-name{
+  /*font-weight: bold;*/
+}
+
+.skill-rating{
+  min-width:150px;
+}
+
+.progress.rating{
+  margin: 7px 0;
+}
+
+.media-heading{
+  margin-top:3px;
+  font-size:16px;
+}
+.media-heading.ls{
+  font-weight:bold;
+  font-size:18px;
+}
