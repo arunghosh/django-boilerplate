@@ -4,6 +4,8 @@ Boilerplate for Django with Session Auth
 Installation:
  * pip install -r requirements.txt
  * bower install
+ * gem install compass
+ * npm install
 
 Server
  * Django
