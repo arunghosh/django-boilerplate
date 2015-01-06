@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'fb',
     'compressor',
-    'app',
     'account',
 )
 
@@ -61,9 +60,9 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-ROOT_URLCONF = 'app.urls'
+ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'app.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Internationalization
@@ -90,9 +89,9 @@ DATE_FORMAT = "%Y-%m-%d"
 TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
  'django.template.loaders.app_directories.Loader')
 
-#TEMPLATE_DIRS = (
-    #os.path.join(BASE_DIR, 'templates'),
-#)
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
