@@ -9,15 +9,13 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')), 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('account.urls')),
-    url(r'^fb/', include('fb.urls')),
-    url(r'^thankyou/$', TemplateView.as_view(template_name="thankyou.html"), name="thankyou"),
+    url(r'^', include('apps.account.urls')),
+    url(r'^fb/', include('apps.fb.urls')),
+    url(r'^thank-you/$', TemplateView.as_view(template_name="thankyou.html"), name="thankyou"),
+    url(r'^/error/$', TemplateView.as_view(template_name="error.html"), name="error"),
     url(r'^$', TemplateView.as_view(template_name="index.html"), name="home"),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += patterns('',
           (r'^static/(?P<path>.*)$', 'django.views.static.serve', {
           'document_root': settings.STATIC_ROOT}))
-
-urlpatterns += patterns('',
-)

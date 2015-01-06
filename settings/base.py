@@ -40,9 +40,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'rest_framework',
-    'fb',
     'compressor',
-    'account',
+    'apps.fb',
+    'apps.account',
 )
 
 MIDDLEWARE_CLASSES = (

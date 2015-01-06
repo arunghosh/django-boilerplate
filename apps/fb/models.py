@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import User
+from apps.account.models import User
 from django.db import transaction
 
 class FbProfileManger(models.Manager):

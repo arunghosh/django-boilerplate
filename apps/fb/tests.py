@@ -1,5 +1,5 @@
 from django.test import TestCase
-from account.models import User
+from apps.account.models import User
 from .models import FbProfile
 
 
