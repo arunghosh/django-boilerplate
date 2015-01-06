@@ -2,15 +2,12 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-UT_PLAYER = 1
-UT_FACULTY = 2
 UT_UNKNOWN = 0
 UT_ADMIN = 99
 
 USER_TYPES = (
     (UT_ADMIN, "Admin"),
-    (UT_FACULTY, "Faculty"),
-    (UT_PLAYER, "Player"),
+    (UT_UNKNOWN, "Unknown"),
 )
 
 
@@ -27,19 +24,6 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
-        return user
-
-    def create_player(self, email, name, password):
-        user = self.create_user(email,
-                                name=name,
-                                password=password,
-                                u_type=UT_PLAYER)
-        return user
-
-    def create_faculty(self, email, name):
-        user = self.create_user(email,
-                                name=name,
-                                u_type=UT_FACULTY)
         return user
 
     def create_superuser(self, email, password, name):

@@ -105,3 +105,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_URL = '/login'
 
 GRAPPELLI_ADMIN_TITLE = "App Name"
+
+FACEBOOK_LOGIN_ENABLED = True

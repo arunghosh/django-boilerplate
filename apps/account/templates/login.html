@@ -25,5 +25,7 @@
 		</div>
 	</div>
 </div>
-{% include "fb.html" %}
+{% if fb_enabled %}
+  {% include "fb.html" %}
+{% endif %}
 {% endblock %}
