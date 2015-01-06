@@ -1,5 +1,6 @@
-{% extends 'index.html' %}
+{% extends "index.html" %}
 {% block content %}
+{% include "fb.js" %}
 <div class="row">
 	<div class="col-md-4 col-md-offset-4">
 		<div class="well">
@@ -24,4 +25,5 @@
 		</div>
 	</div>
 </div>
+{% include "fb.html" %}
 {% endblock %}
