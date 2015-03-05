@@ -60,6 +60,10 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
 ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'wsgi.application'

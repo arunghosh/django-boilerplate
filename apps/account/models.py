@@ -2,25 +2,14 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-UT_UNKNOWN = 0
-UT_ADMIN = 99
-
-USER_TYPES = (
-    (UT_ADMIN, "Admin"),
-    (UT_UNKNOWN, "Unknown"),
-)
-
-
 class UserManager(BaseUserManager):
-    def create_user(self, email, u_type=UT_UNKNOWN, name=None, password=None):
+    def create_user(self, email, name=None, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=UserManager.normalize_email(email),
-            name=name,
-            #phone=phone,
-            type=u_type)
+            name=name,)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -29,7 +18,6 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password, name):
         user = self.create_user(email,
                                 name=name,
-                                u_type=UT_ADMIN,
                                 password=password,)
         user.is_admin = True
         user.save(using=self._db)
@@ -39,7 +27,6 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=254, unique=True, db_index=True)
     name = models.CharField(max_length=64)
-    type = models.PositiveSmallIntegerField(choices=USER_TYPES, default=UT_UNKNOWN)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -48,10 +35,6 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
-
-    @property
-    def type_str(self):
-        return [b for (a, b) in USER_TYPES if a == self.type][0]
 
     def get_full_name(self):
         # For this case we return email. Could also be User.first_name User.last_name if you have these fields
