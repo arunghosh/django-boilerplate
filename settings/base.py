@@ -66,7 +66,7 @@ COMPRESS_PRECOMPILERS = (
 
 ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'apps.wsgi.application'
 
 
 # Internationalization
