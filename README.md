@@ -1,11 +1,17 @@
-Boilerplate for Django with Session Auth
-========================================
+Boilerplate for Django
+======================
+
+Features
+ * SCSS
+ * CSS/JS Compression
+ * Admin UI updated
+ * Login Screen
+ * Custom Auth User with email adress
+ * FB login & registration
 
 Installation:
  * pip install -r requirements.txt
  * bower install
- * gem install compass
- * npm install
 
 Server
  * Django
