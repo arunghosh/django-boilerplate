@@ -1,0 +1,18 @@
+{% if messages %}
+  {% if popup %}
+    {% for message in messages %}
+    <script>
+      alert("{{message}}");
+    </script>
+    {% endfor %}
+  {% else %}
+    {% for message in messages %}
+    <div{% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %}>
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endif %}

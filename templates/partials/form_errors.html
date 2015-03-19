@@ -1,0 +1,6 @@
+{% if form.custom_errors %}
+    {% for e in form.custom_errors %}
+        <div  class="alert alert-danger" role="alert">{{e}}</div>
+    {% endfor %}
+{% endif %}
+

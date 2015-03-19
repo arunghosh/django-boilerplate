@@ -16,6 +16,8 @@ DATABASES = {
     }
 }
 
+BASE_URL = "http://localhost:8000/"
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -32,7 +34,7 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': '_temp/logs/contact_tree.log',
+            'filename': '_temp/logs/app.log',
             'formatter': 'verbose'
         },
     },

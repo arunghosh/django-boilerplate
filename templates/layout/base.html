@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>{% block title %} {% endblock %} | APP_Name</title>
+  {% include 'layout/stylesheets.html' %}
+</head>
+
+<body>
+<div id="wrapper">
+  {% include 'navs/base.html' %}
+  <div id="main" class="container">
+    {% include 'layout/messages.html' %}
+    {% block content %} {% endblock %}
+  </div>
+  <div class="container footer">
+    <div ><i class="fa fa-fw fa-copyright"></i> Copyright 2015 Company Name</div>
+    <div class="d-ib pull-right"><a href="/customer/query/"><i class="fa fa-fw fa-envelope-o"></i> Contact Us</a></div>
+  </div>
+</div>
+{% include 'layout/javascripts.html'%}
+</body>
+</html>
+

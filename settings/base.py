@@ -20,16 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'n8f&s%8p_ul6qa#&n-3e8r*$71qq3y=8aqav0oevqklih1qh@d'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
-
 INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
@@ -51,6 +46,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'apps.account.middleware.ProcessUserLayout',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -58,6 +54,12 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+    "django.contrib.messages.context_processors.messages",
 )
 
 COMPRESS_PRECOMPILERS = (
@@ -68,18 +70,12 @@ ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'apps.wsgi.application'
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 AUTH_USER_MODEL = 'account.User'

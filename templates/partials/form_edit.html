@@ -1,0 +1,10 @@
+{% load bootstrap3 %}
+<form role="form" method="post" enctype="multipart/form-data" {% if layout != 'vertical' %}class="form-{{ layout }}"{% endif %}>
+  {% csrf_token %}
+  {% bootstrap_form form layout=layout %}
+  <div>
+    <button type="submit" class="btn btn-primary"> {{submit_name}} </button>
+  </div>
+</form>
+{% include 'partials/form_errors.html' %}
+

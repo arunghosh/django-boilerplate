@@ -1,27 +1,20 @@
-{% extends "base.html" %}
+{% extends "layout/base.html" %}
+{% block title %}Login{% endblock %}
 {% block content %}
 {% include "fb.js" %}
 <div class="row">
-	<div class="col-md-4 col-md-offset-4">
-		<div class="well">
-			<form role="form" class="form" action="" method="post">
-        {% csrf_token %}
-				<div class="form-group">
-					<label>Email Address</label>
-					<input type="email" name="email" placeholder="ex. example@domain.com" class="form-control"/>
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" name="password" class="form-control" placeholder="******"/>
-				</div>
-				<input type="submit" id="submit" class="btn btn-primary" value="Login"/>
-				<!--<div class="alert alert-danger" role="alert" ng-show="vm.error">{{form.error}}</div>-->
-        {% if form.custom_errors %}
-            {% for e in form.custom_errors %}
-                <div class="alert alert-danger" role="alert">{{e}}</div>
-            {% endfor %}
-        {% endif %}
-			</form>
+  <style>
+    .form-control{
+      margin-top:5px;
+      margin-bottom:25px;
+    }
+  </style>
+	<div class="col-md-5 col-md-offset-3">
+		<div class="well big-well">
+      <br>
+      {% include "partials/form_edit.html" %}
+      <a class="pull-right dim" href='/password/send-reset'>Forgot Password</a>
+      <br>
 		</div>
 	</div>
 </div>
@@ -29,3 +22,4 @@
   {% include "fb.html" %}
 {% endif %}
 {% endblock %}
+

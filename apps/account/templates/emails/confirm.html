@@ -1,0 +1,8 @@
+{% extends "emails/base.html" %}
+{% block body %}
+  <div>Welcome to Healogue!!!</div>
+  <div>Thank you for being a valuable customer.</div>
+  <p>In order to complete your account settings and create a profile in Healogue, please click on the link below.</p>
+  <a href="{{confirm_url}}">{{confirm_url}}</a>
+  <p>Completing the account settings and creating a unique profile will get you one step closer to connect to our US board certified providers.</p>
+{% endblock %}

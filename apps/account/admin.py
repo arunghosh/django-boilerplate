@@ -1,15 +1,30 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import ugettext_lazy as _
+
 from .models import User
 
-class UserAdmin(admin.ModelAdmin):
 
-    def save_model(self, request, user, form, change):
-        if user.password:
-            user.set_password(user.password)
-        user.save()
+class AuthUserAdmin(UserAdmin):
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+                                       'groups', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2'),
+        }),
+    )
 
-    class Meta:
-        model = User
+    list_display = ('first_name', 'last_name', 'email', 'is_staff')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
+    search_fields = ('name', 'email')
+    ordering = ('first_name', 'last_name', )
+    readonly_fields = ('last_login', 'date_joined', )
 
 
-admin.site.register(User, UserAdmin)
+admin.site.register(User, AuthUserAdmin)

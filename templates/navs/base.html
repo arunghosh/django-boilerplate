@@ -11,14 +11,7 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav pull-right">
-        {% if user.is_authenticated %}
-        <li><a href="/search/"><i class="fa fa-fw fa-search"></i> Search</a></li>
-        <li><a href="/players/"><i class="fa fa-fw fa-user"></i> {{user.name}}</a></li>
-          <li><a href="/logout/"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
-        {% else %}
-          <li><a href="/login/">Login</a></li>
-          <li><a href="/register/">Register</a></li>
-        {% endif %}
+        {% include request.nav %}
       </ul>
     </div><!--/.navbar-collapse -->
   </div>

@@ -7,3 +7,5 @@ DEBUG = True
 import dj_database_url
 DATABASES = {}
 DATABASES['default'] =  dj_database_url.config()
+
+BASE_URL = "http://tutio.com/"

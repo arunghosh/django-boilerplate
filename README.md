@@ -2,12 +2,18 @@ Boilerplate for Django
 ======================
 
 Features
- * SCSS
- * CSS/JS Compression
- * Admin UI updated
- * Login Screen
- * Custom Auth User with email adress
- * FB login & registration
+ * Custom Auth User with Email Adress
+ * FB login & Registration
+ * Email Verification
+ * Password Recovery (via email)
+ * FB Login
+ * SCSS/CSS/JS Minification
+ * Settings Segregation
+
+Pages
+ * Login
+ * Password Recovery
+ * Email Confirmation
 
 Installation:
  * pip install -r requirements.txt

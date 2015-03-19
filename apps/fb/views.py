@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 import facebook
 
-from utils.auth import login_model_user
+from apps.utils.auth import login_model_user
 from .models import FbProfile
 
 

@@ -1,0 +1,11 @@
+{% extends request.layout %}
+{% block title %}Email Verification{% endblock %}
+{% block content %}
+  <div class="alert alert-hint">Enter your registered email address. The instruction to reset your password shall be send to your inbox</div>
+  <form method="post" action="">
+    {% csrf_token %}
+    <input type="email" class="form-control" name="email" placeholder="Your registered email address, ex:name@example.com" vvalue="{{email}}" required>
+    <button type="submit" class="btn btn-primary">Send Instructions</button>
+  </form>
+{% endblock %}
+
