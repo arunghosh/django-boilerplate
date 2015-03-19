@@ -29,12 +29,12 @@ class PasswordResetForm(forms.Form):
     def save(self):
         if self.is_valid():
             reset = PasswordReset.objects.get(key=self.cleaned_data['key'])
-            if reset.is_expired():
+            if reset.is_expired:
                 self.custom_errors.append('Token expired')
                 return False
             else:
                 user = reset.user
-                user = self.cleaned_data['password']
+                user.set_password(self.cleaned_data['password'])
                 user.save()
         return True      
   

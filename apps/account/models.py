@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
@@ -46,6 +47,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         # TODO for mutiple emails => find if primary is verified
         return self.emails.all()[0].verified
     
+    @property
+    def name(self):
+        return self.get_full_name()
+
     def get_full_name(self):
         """
         Returns the first_name plus the last_name, with a space in between.
@@ -120,6 +125,7 @@ class PasswordReset(models.Model):
         mail.compose('Password Rest', 'emails/password', context)
         mail.send_async()
 
+    @property
     def is_expired(self):
         exp_time = self.created + timedelta(days=1)
         return exp_time < timezone.now()

@@ -15,7 +15,18 @@ body, table{
   font-size:14px;
   background: #fff;
 }
-
+.alert-hint{
+  background: #eda;
+  color:#222;
+  font-style:italic;
+  font-size:14px;
+}
+.help-block{
+  font-size:12px;
+  font-style:italic;
+  color:#950;
+  margin:2px 0 5px 0;
+}
 .d-ib{
   display: inline-block;
 }

@@ -27,6 +27,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def get_by_email(self, email):
+        return self.get_queryset().get(email=email)
+
 
 class EmailAddressManager(models.Manager):
 
