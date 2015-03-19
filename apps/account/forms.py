@@ -3,10 +3,20 @@ from django.contrib.auth import authenticate, login
 from django.utils.translation import ugettext_lazy as _
 
 from apps.utils.fields import password_field
+from apps.utils.forms import RegistrationFormBase
 
-from .models import PasswordReset
+from .models import PasswordReset, User
 from .strings import FORMS
 
+
+class RegistrationForm(RegistrationFormBase):
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+    
+    def _create_object(self, **kwargs):
+        return User.objects.create(**kwargs)
+    
 
 class PasswordResetForm(forms.Form):
     password = password_field

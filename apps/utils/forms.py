@@ -8,13 +8,12 @@ from .fields import password_field
 
 class RegistrationFormBase(forms.Form):
 
-    username = forms.CharField(label=_('User Name'), help_text=v.username.help_text, validators=v.username.validators)
     first_name = forms.CharField(label=_('First Name'))
     last_name = forms.CharField(label=_('Last Name'))
     email = forms.EmailField()
     email_confirm = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput(), help_text=v.password.help_text, validators=v.password.validators)
-    mobile = forms.CharField(validators=v.mobile.validators)
+    # mobile = forms.CharField(validators=v.mobile.validators)
 
     def __init__(self, *args, **kwargs):
         self.custom_errors = []
@@ -40,8 +39,8 @@ class RegistrationFormBase(forms.Form):
                     email=self.cleaned_data['email'],
                     password=self.cleaned_data['password'],
                     first_name=self.cleaned_data['first_name'],
-                    last_name=self.cleaned_data['last_name'],
-                    mobile=self.cleaned_data['mobile'],)
+                    last_name=self.cleaned_data['last_name']),
+                    # mobile=self.cleaned_data['mobile'],)
             except ValueError as e:
                 self.custom_errors.append(str(e))
             except Exception as e:

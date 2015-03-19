@@ -9,9 +9,16 @@ from django.contrib import messages
 
 from apps.utils.views import handle_success, FormView
 from .strings import PASSWORD
-from .forms import LoginForm, PasswordResetForm
+from .forms import LoginForm, PasswordResetForm, RegistrationForm
 from .models import EmailAddress, EmailConfirm, PasswordReset, User
 
+
+class RegisterView(FormView):
+    template = "form_edit.html"
+    form = RegistrationForm
+    success = "Thanks for resgistering with us. Complete the regisration process by responding to the verfication email."
+    title = "User Registration"
+    submit_name = "Register"
 
 
 class LoginView(View):

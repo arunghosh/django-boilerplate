@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+{% block title%}{{title}}{% endblock %}
+{% block content %} 
+{% load bootstrap3 %}
+<h3>{{title}}</h3>
+<hr>
+<div class="row">
+  <div class="col-md-5">
+      {% include "partials/form_edit.html" %}
+  </div>
+</div>
+{% endblock %}
+
+
