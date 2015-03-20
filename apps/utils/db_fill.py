@@ -1,6 +1,6 @@
 from django.db import transaction
 
-from apps.account.models import AuthUser
+from apps.account.models import User
 
 
 @transaction.atomic
@@ -10,12 +10,12 @@ def fill():
 
 @transaction.atomic
 def _create_superuser():
-    if AuthUser.objects.all():
+    if User.objects.all():
         return
     print "creating super user..."
-    user = AuthUser.objects.create_superuser(
-        username='admin',
+    user = User.objects.create_superuser(
         email='admin@app.com',
-        name='Admin',
+        first_name='Admin',
+        last_name='Admin',
         password='abcd1234',)
     return user
