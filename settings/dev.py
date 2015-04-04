@@ -11,7 +11,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'abcd1234',
         'OPTIONS': {
-            "autocommit": True,
+            # "autocommit": True,
         },
     }
 }
