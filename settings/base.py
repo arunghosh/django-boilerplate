@@ -36,7 +36,6 @@ INSTALLED_APPS = (
     'bootstrap3',
     'rest_framework',
     'compressor',
-    'apps.fb',
     'apps.account',
 )
 
@@ -50,7 +49,6 @@ MIDDLEWARE_CLASSES = (
     'apps.account.middleware.ProcessUserLayout',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-
 )
 
 STATICFILES_FINDERS = (
@@ -110,6 +108,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_URL = '/login'
 
-GRAPPELLI_ADMIN_TITLE = "App Name"
-
-FACEBOOK_LOGIN_ENABLED = True
+GRAPPELLI_ADMIN_TITLE = APP_NAME 

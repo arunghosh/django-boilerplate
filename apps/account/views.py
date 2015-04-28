@@ -39,9 +39,7 @@ class LoginView(View):
         return redirect(request.GET.get('next', reverse("home")))
 
     def _get_login_page(self, request, form):
-        return render(request, 'account/login.html', {
-          'form': form, 
-          'fb_enabled': settings.FACEBOOK_LOGIN_ENABLED})
+        return render(request, 'account/login.html', { 'form': form })
         
 
 class LogoutView(View):
@@ -51,7 +49,7 @@ class LogoutView(View):
         return redirect(reverse("home"))
 
 
-def confirm_email(request, id, key):
+def email_confirm_view(request, id, key):
     try:
         email_confirm = EmailConfirm.objects.get(key=key)
         email_confirm.confirm()
@@ -64,7 +62,7 @@ def confirm_email(request, id, key):
         return redirect(reverse('resend_email_confirm'))
 
 
-class SendConfirmEmail(View):
+class SendConfirmEmailView(View):
     template = 'account/email_confirm_resend.html' 
 
     def get(self, request):
@@ -78,7 +76,7 @@ class SendConfirmEmail(View):
         return render(request, self.template, {'email': email})
       
 
-class SendPasswordResetMail(View):
+class SendPasswordResetMailView(View):
     template = 'account/password/reset_send.html' 
 
     def get(self, request):

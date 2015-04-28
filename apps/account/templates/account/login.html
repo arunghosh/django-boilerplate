@@ -13,13 +13,10 @@
 		<div class="well big-well">
       <br>
       {% include "partials/form_edit.html" %}
-      <a class="pull-right dim" href='/password/send-reset'>Forgot Password</a>
+      <a class="forgot-pass" href='{% url 'send_password_reset'%}'>Forgot Password ?</a>
       <br>
 		</div>
 	</div>
 </div>
-{% if fb_enabled %}
-  {% include "fb.html" %}
-{% endif %}
 {% endblock %}
 
