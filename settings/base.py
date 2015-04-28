@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'bootstrap3',
     'rest_framework',
     'compressor',
+    # 'django_social_project',
+    'social.apps.django_app.default',
     'apps.account',
 )
 
@@ -49,7 +51,7 @@ MIDDLEWARE_CLASSES = (
     'apps.account.middleware.ProcessUserLayout',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-)
+    )
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -57,11 +59,21 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ( 
+TEMPLATE_CONTEXT_PROCESSORS = (
     'django.template.context_processors.debug',
     'django.template.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+
 )
 
 COMPRESS_PRECOMPILERS = (
@@ -91,7 +103,7 @@ TIME_FORMAT = "%d %b %Y T %X"
 DATE_FORMAT = "%Y-%m-%d"
 
 TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
- 'django.template.loaders.app_directories.Loader')
+                    'django.template.loaders.app_directories.Loader')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
@@ -108,4 +120,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_URL = '/login'
 
-GRAPPELLI_ADMIN_TITLE = APP_NAME 
+GRAPPELLI_ADMIN_TITLE = APP_NAME
+
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '883022921755084'
+SOCIAL_AUTH_FACEBOOK_SECRET = '22a33122387ea898942363d85ccc9a7c'

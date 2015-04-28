@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from .views import LoginView, LogoutView, email_confirm_view, \
     SendConfirmEmailView, SendPasswordResetMailView, PasswordResetView, RegisterView
 
@@ -11,4 +11,5 @@ urlpatterns = patterns(
     url(r'^password/send-reset/$', SendPasswordResetMailView.as_view(), name='send_password_reset'),
     url(r'^email/send-verify/$', SendConfirmEmailView.as_view(), name='resend_email_confirm'),
     url(r'^email/confirm/(?P<id>[0-9]*)/(?P<key>[-\w\d]+)$', email_confirm_view, name='email_confirm'),
+    url('', include('social.apps.django_app.urls', namespace='social')),
 )

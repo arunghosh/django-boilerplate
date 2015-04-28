@@ -1,7 +1,9 @@
 {% extends "layout/base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
+{% comment %}
 {% include "fb.js" %}
+{% endcomment %}
 <div class="row">
   <style>
     .form-control{
@@ -14,6 +16,8 @@
       <br>
       {% include "partials/form_edit.html" %}
       <a class="forgot-pass" href='{% url 'send_password_reset'%}'>Forgot Password ?</a>
+    
+      <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
       <br>
 		</div>
 	</div>

@@ -5,7 +5,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import transaction
 
-from apps.utils.urls import full_reverse_url
+from apps.utils.urlresolvers import full_reverse_url
+
 from apps.utils.mail import MailSender
 from .utils import get_random_token
 from .managers import UserManager, EmailAddressManager
@@ -13,8 +14,8 @@ from .managers import UserManager, EmailAddressManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=254, unique=True, db_index=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    first_name = models.CharField(_('first name'), max_length=30, blank=True, null=True,)
+    last_name = models.CharField(_('last name'), max_length=30, blank=True, null=True,)
     is_staff = models.BooleanField(
         _('staff status'), default=False,
         help_text=_('Designates whether the user can log into admin site'))
