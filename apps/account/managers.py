@@ -3,9 +3,10 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name=None, last_name=None, password=None):
+    def create_user(self, username=None, email=None, first_name=None, last_name=None, password=None):
         if not email:
-            raise ValueError('Users must have an email address')
+            email = username
+            # raise ValueError('Users must have an email address')
 
         self._check_unique_email(email)
 

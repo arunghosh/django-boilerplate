@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'compressor',
     'apps.account',
+    'social.apps.django_app.default'
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,11 +59,14 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ( 
+TEMPLATE_CONTEXT_PROCESSORS = (
     'django.template.context_processors.debug',
     'django.template.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+
 )
 
 COMPRESS_PRECOMPILERS = (
@@ -91,7 +96,7 @@ TIME_FORMAT = "%d %b %Y T %X"
 DATE_FORMAT = "%Y-%m-%d"
 
 TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
- 'django.template.loaders.app_directories.Loader')
+                    'django.template.loaders.app_directories.Loader')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
@@ -108,4 +113,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_URL = '/login'
 
-GRAPPELLI_ADMIN_TITLE = APP_NAME 
+GRAPPELLI_ADMIN_TITLE = APP_NAME
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '141295721534-g1g1pfqo75e68k2ukf084ufp4prfjnl1.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'kgXcEi0iofTeZqv5CFaSXLch'
+
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home'
+# SOCIAL_AUTH_LOGIN_URL = '/ '
