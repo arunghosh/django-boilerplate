@@ -39,21 +39,24 @@ class UserProfileBase(ModelBase):
         return self.user.add_log()
 
     @property
-    def full_name(self):
+    def name(self):
         return self.first_name + " " + self.last_name
 
+    @transaction.atomic
     def save(self, *args, **kwargs):
         super(UserProfileBase, self).save(*args, **kwargs)
-        self._update_user(*args, **kwargs)
+        self._upsert_user(*args, **kwargs)
 
-    def _update_user(self, *args, **kwargs):
+    def _upsert_user(self, *args, **kwargs):
         if not self.user:
-            self.user = User.objects.create_user(email=self.email, 
-                username=self.email, 
-                name=self.name, 
+            self.user = User.objects.create_user(
+                email=self.email, 
+                first_name=self.first_name, 
+                last_name=self.last_name,
                 password='abcd1234')
             super(UserProfileBase, self).save(*args, **kwargs)
-        self.user.name = self.name
+        self.user.first_name = self.first_name
+        self.user.last_name = self.last_name
         self.user.email = self.email
         self.user.save()
 
@@ -117,9 +120,9 @@ class RegistrationFormBase(forms.Form):
 
 
 class UserAdminBase(admin.ModelAdmin):
-    list_display = ('name', 'email', 'status', 'created',)
+    list_display = ('name', 'email', 'created',)
     search_fields = ('name', 'email', )
-    list_filter = ('status', )
-    exclude = ('available_timings', 'user')
+    # list_filter = ('status', )
+    exclude = ('user', )
     readonly_fields = ('created', 'modified', )
     
