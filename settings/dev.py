@@ -7,9 +7,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
         'PORT': '5432',
-        'NAME': 'boilerplate',
-        'USER': 'postgres',
-        'PASSWORD': 'abcd1234',
+        'NAME': 'boil',
+        'USER': 'post',
+        'PASSWORD': '1234',
         'OPTIONS': {
             # "autocommit": True,
         },
