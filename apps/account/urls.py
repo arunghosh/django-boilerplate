@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from .views import LoginView, LogoutView, profile, confirm_email, \
+from .views import LoginView, LogoutView, confirm_email, \
     SendConfirmEmail, SendPasswordResetMail, PasswordResetView, RegisterView
 
 urlpatterns = patterns('',
@@ -10,5 +10,4 @@ urlpatterns = patterns('',
     url(r'^password/send-reset/$', SendPasswordResetMail.as_view(), name="send_password_reset"),
     url(r'^email/send-verify/$', SendConfirmEmail.as_view(), name="resend_email_confirm"),
     url(r'^email/confirm/(?P<id>[0-9]*)/(?P<key>[-\w\d]+)$', confirm_email, name="email_confirm"),
-    url(r'^profile/$', profile, name='profile'),
 )

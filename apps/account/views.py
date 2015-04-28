@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
@@ -14,11 +13,11 @@ from .models import EmailAddress, EmailConfirm, PasswordReset, User
 
 
 class RegisterView(FormView):
-    template = "form_edit.html"
+    template = 'form_edit.html'
     form = RegistrationForm
-    success = "Thanks for resgistering with us. Complete the regisration process by responding to the verfication email."
-    title = "User Registration"
-    submit_name = "Register"
+    success_message = 'Thanks for resgistering with us. Complete the regisration process by responding to the verfication email.'
+    title = 'User Registration'
+    submit_button_name = 'Register'
 
 
 class LoginView(View):
@@ -40,9 +39,8 @@ class LoginView(View):
         return redirect(request.GET.get('next', reverse("home")))
 
     def _get_login_page(self, request, form):
-        return render(request, "login.html", {
+        return render(request, 'account/login.html', {
           'form': form, 
-          'submit_name': 'Login',
           'fb_enabled': settings.FACEBOOK_LOGIN_ENABLED})
         
 
@@ -52,14 +50,6 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse("home"))
 
-
-def profile(request):
-    if request.user.is_patient:
-        return redirect(reverse('patient_profile_edit', kwargs={'section': 'biodata'} ))
-    if request.user.is_doctor:
-        return redirect(reverse('doctor_profile_edit', kwargs={'section': 'personal'}))
-    raise Http404()
-    
 
 def confirm_email(request, id, key):
     try:
@@ -75,7 +65,7 @@ def confirm_email(request, id, key):
 
 
 class SendConfirmEmail(View):
-    template = 'resend.html' 
+    template = 'account/email_confirm_resend.html' 
 
     def get(self, request):
         return render(request, self.template, {})
@@ -89,7 +79,7 @@ class SendConfirmEmail(View):
       
 
 class SendPasswordResetMail(View):
-    template = 'password/reset_send.html' 
+    template = 'account/password/reset_send.html' 
 
     def get(self, request):
         return render(request, self.template, {})
@@ -105,7 +95,7 @@ class SendPasswordResetMail(View):
       
 
 class PasswordResetView(FormView):
-    template = 'password/reset.html'
+    template = 'account/password/reset.html'
     form = PasswordResetForm
     submit_name = 'Update Password'
     success_url = reverse_lazy('login')

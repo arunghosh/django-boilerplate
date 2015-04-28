@@ -3,7 +3,7 @@
   {% csrf_token %}
   {% bootstrap_form form layout=layout %}
   <div>
-    <button type="submit" class="btn btn-primary"> {{submit_name}} </button>
+    <button type="submit" class="btn btn-primary"> {{form.submit_button_name}} </button>
   </div>
 </form>
 {% include 'partials/form_errors.html' %}

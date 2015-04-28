@@ -70,6 +70,8 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
+APP_NAME = "App_Name"
+
 ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'apps.wsgi.application'

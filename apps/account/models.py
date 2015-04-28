@@ -71,11 +71,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return "admin"
 
 
-# @receiver(post_save, sender=get_user_model())
-# def create_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
-
 class UserLog(models.Model):
     user = models.ForeignKey(User, related_name='logs')
     time = models.DateTimeField(default=timezone.now)

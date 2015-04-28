@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.utils.translation import ugettext_lazy as _
 
 from apps.utils.fields import password_field
-from apps.utils.forms import RegistrationFormBase
 
+from .base import RegistrationFormBase
 from .models import PasswordReset, User
 from .strings import FORMS
 
@@ -15,12 +15,12 @@ class RegistrationForm(RegistrationFormBase):
         super(RegistrationForm, self).__init__(*args, **kwargs)
     
     def _create_object(self, **kwargs):
-        return User.objects.create(**kwargs)
+        return User.objects.create_user(**kwargs)
     
 
 class PasswordResetForm(forms.Form):
+    submit_button_name = 'Reset Password'
     password = password_field
-    # confirm_password = password_field
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "********"}))
     key = forms.CharField(widget=forms.HiddenInput())
 
@@ -50,7 +50,8 @@ class PasswordResetForm(forms.Form):
   
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label=_("User Name"))
+    submit_button_name = 'Login'
+    email = forms.EmailField(label=_("User Name/ Email"))
     password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "********"}))
 
     def __init__(self, *args, **kwargs):

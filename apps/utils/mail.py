@@ -1,12 +1,13 @@
+from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 import threading
 
 
-MAIL_SUBJ_BASE = "Tutio - "
-
 class MailSender(threading.Thread):
+
+    MAIL_SUBJ_BASE = settings.APP_NAME + " - "
 
     def __init__(self, user):
         threading.Thread.__init__(self)
@@ -19,9 +20,9 @@ class MailSender(threading.Thread):
         d = Context(context_json)
         text_content = get_template(template_url + '.txt').render(d)
         html_content = get_template(template_url + '.html').render(d)
-        self.msg = EmailMultiAlternatives(MAIL_SUBJ_BASE + title,
+        self.msg = EmailMultiAlternatives(self.MAIL_SUBJ_BASE + title,
                                      text_content,
-                                     "info@tutio.com",
+                                     "info@app.com",
                                      [self.user.email])
         self.msg.attach_alternative(html_content, "text/html")
 

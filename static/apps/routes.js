@@ -27,7 +27,7 @@
     })
 
     function templateUrl(url){
-      return '/static/js/' + url;
+      return '/static/apps/' + url;
     }
 
   };

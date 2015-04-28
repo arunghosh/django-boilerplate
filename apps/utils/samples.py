@@ -5,11 +5,15 @@ from apps.account.models import User
 
 @transaction.atomic
 def fill():
+    ''' Fill DB with sample data
+    '''
     _create_superuser()
 
 
 @transaction.atomic
 def _create_superuser():
+    ''' Create super user
+    '''
     if User.objects.all():
         return
     print "creating super user..."
