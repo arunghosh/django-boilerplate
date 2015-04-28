@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import transaction
 
-from apps.utils.urls import full_reverse_url
+from apps.utils.urlresolvers import full_reverse_url
 from apps.utils.mail import MailSender
 from .utils import get_random_token
 from .managers import UserManager, EmailAddressManager
