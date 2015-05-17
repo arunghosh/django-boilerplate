@@ -54,6 +54,3 @@ class EmailAddressManager(models.Manager):
             user = user,
             email = user.email,
             primary = True)
-
-
-

@@ -6,7 +6,7 @@ from django.db import models, transaction
 from django.contrib import admin
 from django import forms
 
-from apps.utils.models import ModelBase
+from apps.utils.models import AbstractModel
 import apps.utils.validators as v
 from .models import User
 
@@ -19,7 +19,7 @@ GENDER_OPTS = (
 )
 
 
-class UserProfileBase(ModelBase):
+class UserProfileBase(AbstractModel):
     user = models.OneToOneField(User, related_name="%(class)s_profile", null=True, blank=True)
     first_name = models.CharField(max_length=64)
     middle_name = models.CharField(max_length=64, blank=True, null=True)

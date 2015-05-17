@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class ModelBase(models.Model):
+class AbstractModel(models.Model):
 
     def display_as_div(self, fields=None):
         ''' Display for model fields in div format
@@ -36,7 +36,15 @@ class ModelBase(models.Model):
         abstract = True
 
 
-class NameOnlyModelBase(ModelBase):
+class AbstractTimestampModel(AbstractModel):
+    created_on = models.DateField(auto_now_add=True, editable=False)
+    modified_on = models.DateField(auto_now=True, editable=False)
+
+    class Meta:
+        abstract = True
+
+
+class AbstractNameOnlyModel(AbstractModel):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=64, blank=True, null=True)
 

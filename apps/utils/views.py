@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
-from django.views.generic import View
+from django.views.generic import View, ListView
 from django.contrib import messages
 
 
@@ -40,6 +40,8 @@ class FormView(View):
 
 
 def handle_success(request, message, url=None):
+    ''' Redirect to home if no success url provied
+    '''
     if not url:
         url = reverse('home')
     messages.success(request, message)
