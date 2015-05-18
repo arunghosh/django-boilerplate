@@ -6,7 +6,7 @@ from django.db import models, transaction
 from django.contrib import admin
 from django import forms
 
-from apps.utils.models import AbstractModel
+from apps.utils.models import AbstractTimestampModel
 import apps.utils.validators as v
 from .models import User
 
@@ -19,10 +19,9 @@ GENDER_OPTS = (
 )
 
 
-class UserProfileBase(AbstractModel):
+class AbstractUserProfile(AbstractTimestampModel):
     user = models.OneToOneField(User, related_name="%(class)s_profile", null=True, blank=True)
     first_name = models.CharField(max_length=64)
-    middle_name = models.CharField(max_length=64, blank=True, null=True)
     last_name = models.CharField(max_length=64)
     email = models.CharField(max_length=128)
     mobile = models.CharField(max_length=64, null=True, blank=True, validators = v.mobile.validators)
@@ -31,9 +30,6 @@ class UserProfileBase(AbstractModel):
     country = models.CharField(max_length=64, null=True, blank=True)
     gender = models.PositiveSmallIntegerField(choices=GENDER_OPTS, default=0, verbose_name="Gender")
     dob = models.DateField(null=True, blank=True)
-  
-    created = models.DateTimeField(default=timezone.now, verbose_name="Joined On")
-    modified = models.DateTimeField(auto_now=True)
 
     def add_log(self):
         return self.user.add_log()
@@ -44,7 +40,7 @@ class UserProfileBase(AbstractModel):
 
     @transaction.atomic
     def save(self, *args, **kwargs):
-        super(UserProfileBase, self).save(*args, **kwargs)
+        super(AbstractUserProfile, self).save(*args, **kwargs)
         self._upsert_user(*args, **kwargs)
 
     def _upsert_user(self, *args, **kwargs):
@@ -54,7 +50,7 @@ class UserProfileBase(AbstractModel):
                 first_name=self.first_name, 
                 last_name=self.last_name,
                 password='abcd1234')
-            super(UserProfileBase, self).save(*args, **kwargs)
+            super(AbstractUserProfile, self).save(*args, **kwargs)
         self.user.first_name = self.first_name
         self.user.last_name = self.last_name
         self.user.email = self.email
@@ -64,7 +60,7 @@ class UserProfileBase(AbstractModel):
         abstract = True
 
 
-class RegistrationFormBase(forms.Form):
+class AbstractRegistrationForm(forms.Form):
 
     submit_button_name = 'Register'
 
@@ -76,10 +72,10 @@ class RegistrationFormBase(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.custom_errors = []
-        super(RegistrationFormBase, self).__init__(*args, **kwargs)
+        super(AbstractRegistrationForm, self).__init__(*args, **kwargs)
 
     @abstractmethod
-    def _create_object(self, **kwargs):
+    def create_object(self, **kwargs):
         ''' You can overrride object creation in the firn save method
         ex: CustomUser.objects.register(**kwargs)
         '''
@@ -88,7 +84,7 @@ class RegistrationFormBase(forms.Form):
     def clean_email_confirm(self):
         ''' Check if email and confirm email are the same
         '''
-        cleaned_data = super(RegistrationFormBase, self).clean() 
+        cleaned_data = super(AbstractRegistrationForm, self).clean() 
         email = cleaned_data.get('email')
         confirm = cleaned_data.get('email_confirm')
         if email != confirm:
@@ -99,7 +95,11 @@ class RegistrationFormBase(forms.Form):
     def save(self):
         if self.is_valid():
             try:
-                return self._save()
+                return self.create_object(
+                    email=self.cleaned_data['email'],
+                    password=self.cleaned_data['password'],
+                    first_name=self.cleaned_data['first_name'],
+                    last_name=self.cleaned_data['last_name']),
             except ValueError as e:
                 self.custom_errors.append(str(e))
             except Exception as e:
@@ -107,16 +107,6 @@ class RegistrationFormBase(forms.Form):
                 print e
                 self.custom_errors.append("Failed to register user.")
             return
-
-    def _save(self):
-        ''' Invoke the object creation
-        '''
-        return self._create_object(
-            email=self.cleaned_data['email'],
-            password=self.cleaned_data['password'],
-            first_name=self.cleaned_data['first_name'],
-            last_name=self.cleaned_data['last_name']),
-
 
 
 class UserAdminBase(admin.ModelAdmin):

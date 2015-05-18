@@ -25,21 +25,21 @@ class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated():
             return self.home_view(request)
-        form = LoginForm()
-        return self._get_login_page(request, form);
+        self.form = LoginForm()
+        return self._get_login_page();
 
     def post(self, request):
-        form = LoginForm(request.POST)
-        form.authenticate(request)
+        self.form = LoginForm(request.POST)
+        self.form.authenticate(request)
         if request.user.is_authenticated():
-            return self.home_view(request)
-        return self._get_login_page(request, form);
+            return self.home_view()
+        return self._get_login_page();
 
-    def home_view(self, request):
-        return redirect(request.GET.get('next', reverse("home")))
+    def home_view(self):
+        return redirect(self.request.GET.get('next', reverse("home")))
 
-    def _get_login_page(self, request, form):
-        return render(request, 'account/login.html', { 'form': form })
+    def _get_login_page(self):
+        return render(self.request, 'account/login.html', { 'form': self.form })
         
 
 class LogoutView(View):

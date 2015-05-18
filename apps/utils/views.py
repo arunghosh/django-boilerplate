@@ -1,11 +1,13 @@
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, RedirectView
+from django.views.generic.list import ListView
+# from django.views.generic.edit import FormView
+
 from django.contrib import messages
 
 
 class FormView(View):
-    submit_button_name = "Save"
     title = None
     success_message = "Updated"
     success_url = reverse_lazy('home')
@@ -34,7 +36,6 @@ class FormView(View):
     def _render(self, request, form):
         return render(request, self.template, {
           'form': form, 
-          'submit_button_name' : self.submit_button_name, 
           'title': self.title,
           })
 

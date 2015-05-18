@@ -4,19 +4,22 @@ from django.utils.translation import ugettext_lazy as _
 
 from apps.utils.fields import password_field
 
-from .base import RegistrationFormBase
+from .base import AbstractRegistrationForm, AbstractUserProfile
 from .models import PasswordReset, User
 from .strings import FORMS
 
 
-class RegistrationForm(RegistrationFormBase):
+class RegistrationForm(AbstractRegistrationForm):
 
-    def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
-    
-    def _create_object(self, **kwargs):
+    def create_object(self, **kwargs):
         return User.objects.create_user(**kwargs)
+
+
+class UserProfileForm(forms.ModelForm):
     
+    class Meta:
+        model = AbstractUserProfile
+
 
 class PasswordResetForm(forms.Form):
     submit_button_name = 'Reset Password'
@@ -62,18 +65,16 @@ class LoginForm(forms.Form):
 
     def authenticate(self, request):
         if self.is_valid():
-            try:
-                self.user = authenticate(
-                    email=self.cleaned_data['email'], 
-                    password=self.cleaned_data['password'])
-                if self.user:
-                    # self._check_confirm_and_login(request)
-                    login(request, self.user)
-            except Exception as e:
-                print str(e)
+            self.user = authenticate(
+                email=self.cleaned_data.get('email', None), 
+                password=self.cleaned_data.get('password', None))
+            if self.user:
+                # self._check_confirm_and_login(request)
+                login(request, self.user)
+            else:
+                self.custom_errors.append(self.error)
         else:
             pass
-        self.custom_errors.append(self.error)
         return self.user
 
     def _check_confirm_and_login(self, request):
