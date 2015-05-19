@@ -36,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def _create_confirm_email(self):
         if not len(self.emails.all()):
             email = EmailAddress.objects.create_primary(self)
-            email.send_confirm()
+            # email.send_confirm()
 
     @property
     def is_confirmed(self):

@@ -2,22 +2,19 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.core.urlresolvers import reverse, reverse_lazy
-
-from django.conf import settings
+from django.views.generic.base import TemplateView
 from django.contrib import messages
 
-from apps.utils.views import handle_success, FormView
+from apps.utils.views import handle_success, AbstractFormView
 from .strings import PASSWORD
 from .forms import LoginForm, PasswordResetForm, RegistrationForm
 from .models import EmailAddress, EmailConfirm, PasswordReset, User
 
 
-class RegisterView(FormView):
-    template = 'form_edit.html'
-    form = RegistrationForm
+class RegisterView(AbstractFormView):
+    template_name = 'form_edit.html'
+    form_class = RegistrationForm
     success_message = 'Thanks for resgistering with us. Complete the regisration process by responding to the verfication email.'
-    title = 'User Registration'
-    submit_button_name = 'Register'
 
 
 class LoginView(View):
@@ -42,11 +39,9 @@ class LoginView(View):
         return render(self.request, 'account/login.html', { 'form': self.form })
         
 
-class LogoutView(View):
-
-    def get(self, request):
-        logout(request)
-        return redirect(reverse("home"))
+def logout_view(self, request):
+    logout(request)
+    return redirect(reverse("home"))
 
 
 def email_confirm_view(request, id, key):
@@ -54,19 +49,14 @@ def email_confirm_view(request, id, key):
         email_confirm = EmailConfirm.objects.get(key=key)
         email_confirm.confirm()
         return handle_success(
-            request, 
-            'Thank you for confirming your email address. Login to continue.', 
-            reverse('login') + '?username=' + email_confirm.email_address.user.username) 
+            request, 'Thank you for confirming your email address. Login to continue.', reverse('login')) 
     except EmailConfirm.DoesNotExist:
         messages.info(request, 'Failed to confirm your email. Request another confirmation token')
         return redirect(reverse('resend_email_confirm'))
 
 
-class SendConfirmEmailView(View):
+class SendConfirmEmailView(TemplateView):
     template = 'account/email_confirm_resend.html' 
-
-    def get(self, request):
-        return render(request, self.template, {})
 
     def post(self, request):
         email = request.POST.get('email', None)
@@ -76,11 +66,8 @@ class SendConfirmEmailView(View):
         return render(request, self.template, {'email': email})
       
 
-class SendPasswordResetMailView(View):
-    template = 'account/password/reset_send.html' 
-
-    def get(self, request):
-        return render(request, self.template, {})
+class SendPasswordResetMailView(TemplateView):
+    template_name = 'account/password/reset_send.html' 
 
     def post(self, request):
         try:
@@ -92,14 +79,11 @@ class SendPasswordResetMailView(View):
             return render(request, self.template, {'email': email})
       
 
-class PasswordResetView(FormView):
-    template = 'account/password/reset.html'
-    form = PasswordResetForm
-    submit_name = 'Update Password'
+class PasswordResetView(AbstractFormView):
+    template_name = 'account/password/reset.html'
+    form_class = PasswordResetForm
+    success_message = 'Password Successfully Updated'
     success_url = reverse_lazy('login')
 
-    def get(self, request, id, key):
-        return super(PasswordResetView, self).get(request, initial={'key': key})
-
-    def post(self, request, id, key):
-        return super(PasswordResetView, self).post(request)
+    def get_initial(self):
+        return {'key': self.kwargs}

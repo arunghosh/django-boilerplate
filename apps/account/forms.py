@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from apps.utils.fields import password_field
 
-from .base import AbstractRegistrationForm, AbstractUserProfile
+from .base import AbstractRegistrationForm
 from .models import PasswordReset, User
 from .strings import FORMS
 
@@ -13,12 +13,6 @@ class RegistrationForm(AbstractRegistrationForm):
 
     def create_object(self, **kwargs):
         return User.objects.create_user(**kwargs)
-
-
-class UserProfileForm(forms.ModelForm):
-    
-    class Meta:
-        model = AbstractUserProfile
 
 
 class PasswordResetForm(forms.Form):
