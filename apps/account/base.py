@@ -68,7 +68,7 @@ class AbstractRegistrationForm(forms.Form):
     last_name = forms.CharField(label=_('Last Name'))
     email = forms.EmailField()
     email_confirm = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput(), help_text=v.password.help_text, validators=v.password.validators)
+    password = forms.CharField(widget=forms.PasswordInput())
 
     def __init__(self, *args, **kwargs):
         self.custom_errors = []

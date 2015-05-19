@@ -10,6 +10,7 @@ from .strings import FORMS
 
 
 class RegistrationForm(AbstractRegistrationForm):
+    title = "Register"
 
     def create_object(self, **kwargs):
         return User.objects.create_user(**kwargs)

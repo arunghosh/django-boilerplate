@@ -3,7 +3,8 @@ from django.db import models
 import apps.utils.validators as v
 
 
-password_field = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "********"}), help_text=v.password.help_text, validators=v.password.validators)
+password_field = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "********"}), )
+# password_field = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "********"}), help_text=v.password.help_text, validators=v.password.validators)
 
 
 class CSVCharField(models.CharField):
