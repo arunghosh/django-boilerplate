@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'compressor',
     'apps.account',
+    'coverage',
+    'model_mommy',
 )
 
 MIDDLEWARE_CLASSES = (
