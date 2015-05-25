@@ -12,7 +12,10 @@ class AbstractFormView(FormView):
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
-        messages.success(self.request, self.success_message)
+        if form.save():
+            messages.success(self.request, self.success_message)
+        else:
+            return self.form_invalid(form)
         return super(AbstractFormView, self).form_valid(form)
 
 

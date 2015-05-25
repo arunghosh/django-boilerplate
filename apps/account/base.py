@@ -122,11 +122,7 @@ class AbstractRegistrationForm(forms.Form):
     def save(self):
         if self.is_valid():
             try:
-                return self.create_object(
-                    email=self.cleaned_data['email'],
-                    password=self.cleaned_data['password'],
-                    first_name=self.cleaned_data['first_name'],
-                    last_name=self.cleaned_data['last_name']),
+                return self.create_object(**self.cleaned_data)
             except ValueError as e:
                 self.custom_errors.append(str(e))
             except Exception as e:
