@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'bootstrap3',
+    'crispy_forms',
     'rest_framework',
     'compressor',
     'apps.account',
@@ -73,6 +74,8 @@ COMPRESS_PRECOMPILERS = (
 )
 
 APP_NAME = "App_Name"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 ROOT_URLCONF = 'urls'
 

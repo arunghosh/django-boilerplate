@@ -2,7 +2,11 @@ from django import forms
 from django.contrib.auth import authenticate, login
 from django.utils.translation import ugettext_lazy as _
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
 from apps.utils.fields import password_field
+from apps.utils.forms import AbstractFrom
 
 from .base import AbstractRegistrationForm
 from .models import PasswordReset, User
@@ -11,6 +15,12 @@ from .strings import FORMS
 
 class RegistrationForm(AbstractRegistrationForm):
     title = "Register"
+    helper = FormHelper()
+    helper.add_input(Submit('login', 'login'))
+    helper.render_required_fields = False
+    helper.html5_required = True
+    # helper.form_show_labels = False
+
 
     def create_object(self, **kwargs):
         return User.objects.create_user(**kwargs)
@@ -47,18 +57,15 @@ class PasswordResetForm(forms.Form):
         return True      
   
 
-class LoginForm(forms.Form):
-    submit_button_name = 'Login'
+class LoginForm(AbstractFrom):
     email = forms.EmailField(label=_("User Name/ Email"))
     password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "********"}))
-
-    def __init__(self, *args, **kwargs):
-        self.custom_errors = []
-        self.user = None
-        self.error = "Invalid email and/or password"  
-        super(LoginForm, self).__init__(*args, **kwargs)
+    
+    error = 'Invalid email and/or password'
+    button_name = 'Login'
 
     def authenticate(self, request):
+        self.context['request'] = request
         if self.is_valid():
             self.user = authenticate(
                 email=self.cleaned_data.get('email', None), 
@@ -67,17 +74,15 @@ class LoginForm(forms.Form):
                 # self._check_confirm_and_login(request)
                 login(request, self.user)
             else:
-                self.custom_errors.append(self.error)
-        else:
-            pass
+                self.add_error(self.error)
         return self.user
 
-    def _check_confirm_and_login(self, request):
+    def _check_confirm_and_login(self):
         if self.user.is_confirmed:
-            login(request, self.user)
+            login(self.context['request'], self.user)
             self.user.add_log(FORMS['user_logged'])
         else:
-            self.error = "Email not verified"
+            self.add_error("Email not verified")
             return self.user
 
 
