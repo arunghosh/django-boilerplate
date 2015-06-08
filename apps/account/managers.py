@@ -2,6 +2,18 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager
 
 
+class UserProfileManager(models.Manager):
+
+    def register(self, email, password, first_name, last_name, mobile):
+        profile = self.create(
+            first_name=first_name,
+            password=password,
+            last_name=last_name,
+            mobile=mobile,
+            email=email,)
+        return profile
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name=None, last_name=None, password=None):
         if not email:

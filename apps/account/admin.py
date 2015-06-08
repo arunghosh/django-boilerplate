@@ -26,5 +26,11 @@ class AuthUserAdmin(UserAdmin):
     ordering = ('first_name', 'last_name', )
     readonly_fields = ('last_login', 'date_joined', )
 
-
+class UserAdminBase(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created',)
+    search_fields = ('name', 'email', )
+    # list_filter = ('status', )
+    exclude = ('user', )
+    readonly_fields = ('created', 'modified', )
+ 
 admin.site.register(User, AuthUserAdmin)

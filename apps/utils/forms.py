@@ -15,4 +15,4 @@ class AbstractFrom(forms.Form):
 
     def add_error(self, msg):
         self.errors['__all__'] = self.errors.get('__all__', [])
-        self.errors['__all__'].append(self.error)
+        self.errors['__all__'].append(msg)
