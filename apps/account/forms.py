@@ -17,7 +17,8 @@ from .strings import FORMS
 
 class AbstractRegistrationForm(AbstractFrom):
 
-    title = "Register"
+    title = 'Register'
+    button_name = 'Register'
 
     first_name = forms.CharField(label=_('First Name'))
     last_name = forms.CharField(label=_('Last Name'))
@@ -25,10 +26,6 @@ class AbstractRegistrationForm(AbstractFrom):
     email_confirm = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput())
 
-    helper = FormHelper()
-    helper.add_input(Submit('Register', 'Register'))
-    helper.render_required_fields = False
-    helper.html5_required = True
 
     @abstractmethod
     def create_object(self, **kwargs):
@@ -69,8 +66,8 @@ class RegistrationForm(AbstractRegistrationForm):
         return User.objects.create_user(**kwargs)
 
 
-class PasswordResetForm(forms.Form):
-    submit_button_name = 'Reset Password'
+class PasswordResetForm(AbstractFrom):
+    button_name = 'Reset Password'
     password = password_field
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "********"}))
     key = forms.CharField(widget=forms.HiddenInput())

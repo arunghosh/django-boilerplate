@@ -10,8 +10,14 @@ class AbstractFrom(forms.Form):
     def __init__(self, *args, **kwargs):
         super(AbstractFrom, self).__init__(*args, **kwargs)
         self.context = {}
-        self.helper= FormHelper()
-        self.helper.add_input(Submit(self.button_name, self.button_name))
+        self.helper = self.get_crispy_helper()
+
+    def get_crispy_helper(self):
+        helper= FormHelper()
+        helper.add_input(Submit(self.button_name, self.button_name))
+        helper.render_required_fields = False
+        helper.html5_required = True
+        return helper
 
     def add_error(self, msg):
         self.errors['__all__'] = self.errors.get('__all__', [])
