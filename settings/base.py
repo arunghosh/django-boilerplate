@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'debug_toolbar',
     'bootstrap3',
     'crispy_forms',
@@ -90,6 +91,7 @@ USE_L10N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = 'account.User'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
