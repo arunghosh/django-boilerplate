@@ -1,1 +1,1 @@
-__author__ = 'lenovo'
+from .dev import *
