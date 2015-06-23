@@ -4,7 +4,7 @@ from apps.account.models import User
 
 
 @transaction.atomic
-def fill():
+def run():
     ''' Fill DB with sample data
     '''
     _create_superuser()
@@ -23,3 +23,4 @@ def _create_superuser():
         last_name='Admin',
         password='abcd1234',)
     return user
+

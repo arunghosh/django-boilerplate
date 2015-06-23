@@ -33,15 +33,17 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'django_extensions',
     'debug_toolbar',
     'bootstrap3',
     'crispy_forms',
     'rest_framework',
     'compressor',
-    'apps.account',
     'coverage',
     'model_mommy',
+
+    'apps.account',
 )
 
 MIDDLEWARE_CLASSES = (
