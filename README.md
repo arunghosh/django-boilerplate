@@ -1,9 +1,10 @@
-Boilerplate for Django
+Installation Details
 ======================
+
+Add you custom settings to settings/__init__.py file
 
 Features
  * Custom Auth User with Email Adress
- * FB login & Registration
  * Email Verification
  * Password Recovery (via email)
  * FB Login
@@ -21,7 +22,6 @@ Installation:
 
 Server
  * Django
- * Rest Framework
 
 Client
  * Angular
