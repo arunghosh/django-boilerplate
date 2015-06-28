@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'model_mommy',
 
     'apps.account',
+    'apps.profiles',
 )
 
 MIDDLEWARE_CLASSES = (

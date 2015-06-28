@@ -7,14 +7,8 @@ from django.contrib import messages
 
 from apps.utils.views import handle_success, AbstractFormView
 from .strings import PASSWORD
-from .forms import LoginForm, PasswordResetForm, RegistrationForm
+from .forms import LoginForm, PasswordResetForm
 from .models import EmailAddress, EmailConfirm, PasswordReset, User
-
-
-class RegisterView(AbstractFormView):
-    template_name = 'form_edit.html'
-    form_class = RegistrationForm
-    success_message = 'Thanks for resgistering with us. Complete the regisration process by responding to the verfication email.'
 
 
 class LoginView(View):

@@ -1,1 +1,3 @@
-from .production import *
+from .dev import *
+
+DATABASE_NAME = 'boilerplate'
