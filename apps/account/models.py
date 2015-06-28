@@ -88,7 +88,7 @@ class AbstractUserProfileModel(AbstractTimestampModel):
       (1, "Male"),
       (2, "Female"),
     )
-    user = models.OneToOneField(User, related_name="%(class)s_profile", null=True, blank=True)
+    user = models.OneToOneField(User, related_name="%(class)s_profile", primary_key=True)
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     email = models.CharField(max_length=128)
@@ -111,8 +111,8 @@ class AbstractUserProfileModel(AbstractTimestampModel):
 
     @transaction.atomic
     def save(self, *args, **kwargs):
-        super(AbstractUserProfileModel, self).save(*args, **kwargs)
         self._create_user()
+        super(AbstractUserProfileModel, self).save(*args, **kwargs)
         self._update_user()
 
     def _update_user(self):
@@ -132,7 +132,6 @@ class AbstractUserProfileModel(AbstractTimestampModel):
             self.user = User.objects.create_user(
                 email=self.email, 
                 password=self.password)
-            super(AbstractUserProfileModel, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True
