@@ -11,7 +11,7 @@ from crispy_forms.layout import Submit
 from apps.utils.fields import password_field
 from apps.utils.forms import AbstractFrom
 
-from .models import PasswordReset, User
+from .models import PasswordReset
 from .strings import FORMS
 
 

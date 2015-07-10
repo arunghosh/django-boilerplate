@@ -10,7 +10,7 @@ from apps.utils.mail import MailSender
 from apps.utils.models import AbstractTimestampModel
 
 from .utils import get_random_token
-from .managers import UserManager, EmailAddressManager, UserProfileManager
+from .managers import EmailAddressManager, UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):

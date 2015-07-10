@@ -33,7 +33,7 @@ class LoginView(View):
         return render(self.request, 'account/login.html', { 'form': self.form })
         
 
-def logout_view(self, request):
+def logout_view(request):
     logout(request)
     return redirect(reverse("home"))
 
