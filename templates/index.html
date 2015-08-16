@@ -1,5 +1,19 @@
-{% extends "layout/base.html" %}
-{% block title %}Home{% endblock %}
-{% block content %}
-  <h4>Index Page</h4>
-{% endblock %}
+<html ng-app="app">
+<head>
+<base href="/"/>
+<title page-title></title>
+{% include 'layout/stylesheets.html' %}
+</head>
+
+<body ng-controller="LayoutCtrl as lc">
+<div id="wrapper_main">
+  <div id="header">
+    <div ng-include="'/static/apps/layout/html/header.layout.html'"></div>
+  </div>
+  <toaster-container></toaster-container>
+  <div ui-view="main" class="anim-in-out anim-fade" data-anim-speed="200"></div>
+</div>
+{% include 'layout/javascripts.html'%}
+</body>
+</html>
+

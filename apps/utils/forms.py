@@ -19,6 +19,6 @@ class AbstractFrom(forms.Form):
         helper.html5_required = True
         return helper
 
-    def add_error(self, msg):
+    def add_common_error(self, msg):
         self.errors['__all__'] = self.errors.get('__all__', [])
         self.errors['__all__'].append(msg)

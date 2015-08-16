@@ -63,7 +63,7 @@ class LoginForm(AbstractFrom):
                 # self._check_confirm_and_login(request)
                 login(request, self.user)
             else:
-                self.add_error(self.error)
+                self.add_common_error(self.error)
         return self.user
 
     def _check_confirm_and_login(self):
@@ -71,7 +71,7 @@ class LoginForm(AbstractFrom):
             login(self.context['request'], self.user)
             self.user.add_log(FORMS['user_logged'])
         else:
-            self.add_error("Email not verified")
+            self.add_common_error("Email not verified")
             return self.user
 
 
